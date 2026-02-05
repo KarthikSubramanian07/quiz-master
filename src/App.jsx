@@ -1,17 +1,20 @@
 import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import QuizSession from './pages/QuizSession'
+import Results from './pages/Results'
+import Stats from './pages/Stats'
 
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="text-center">
-        <h1 className="text-6xl font-bold text-primary-700 mb-4 animate-fade-in">
-          QuizMaster
-        </h1>
-        <p className="text-xl text-gray-600 animate-slide-up">
-          Test Your Knowledge, Track Your Progress
-        </p>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/quiz/:categoryId" element={<QuizSession />} />
+        <Route path="/results" element={<Results />} />
+        <Route path="/stats" element={<Stats />} />
+      </Routes>
+    </Router>
   )
 }
 
