@@ -37,6 +37,7 @@ export const quizData = {
       question: 'What is the most abundant gas in Earth\'s atmosphere?',
       options: ['Oxygen', 'Carbon Dioxide', 'Nitrogen', 'Hydrogen'],
       correctAnswer: 2,
+      difficulty: 'hard',
       explanation: 'Nitrogen makes up about 78% of Earth\'s atmosphere.'
     },
     {
@@ -44,6 +45,7 @@ export const quizData = {
       question: 'What is the hardest natural substance on Earth?',
       options: ['Diamond', 'Steel', 'Titanium', 'Graphene'],
       correctAnswer: 0,
+      difficulty: 'medium',
       explanation: 'Diamond is the hardest naturally occurring substance, rating 10 on the Mohs scale.'
     },
     {
@@ -51,6 +53,7 @@ export const quizData = {
       question: 'How many bones does an adult human have?',
       options: ['186', '206', '226', '246'],
       correctAnswer: 1,
+      difficulty: 'hard',
       explanation: 'An adult human skeleton has 206 bones, while a baby has around 270 that fuse as they grow.'
     },
     {
@@ -58,6 +61,7 @@ export const quizData = {
       question: 'What is the smallest unit of life?',
       options: ['Atom', 'Molecule', 'Cell', 'Organ'],
       correctAnswer: 2,
+      difficulty: 'medium',
       explanation: 'The cell is the smallest unit that can carry out all the processes of life.'
     },
     {
@@ -65,6 +69,7 @@ export const quizData = {
       question: 'What is the process by which plants make their food?',
       options: ['Respiration', 'Photosynthesis', 'Digestion', 'Fermentation'],
       correctAnswer: 1,
+      difficulty: 'easy',
       explanation: 'Photosynthesis uses sunlight, water, and carbon dioxide to produce glucose and oxygen.'
     },
     {
@@ -72,6 +77,7 @@ export const quizData = {
       question: 'What is the largest organ in the human body?',
       options: ['Heart', 'Liver', 'Brain', 'Skin'],
       correctAnswer: 3,
+      difficulty: 'medium',
       explanation: 'The skin is the largest organ, covering about 20 square feet in adults.'
     }
   ],
@@ -81,6 +87,7 @@ export const quizData = {
       question: 'In which year did World War II end?',
       options: ['1943', '1944', '1945', '1946'],
       correctAnswer: 2,
+      difficulty: 'medium',
       explanation: 'World War II ended in 1945 with Germany\'s surrender in May and Japan\'s in September.'
     },
     {
@@ -88,6 +95,7 @@ export const quizData = {
       question: 'Who was the first President of the United States?',
       options: ['Thomas Jefferson', 'George Washington', 'John Adams', 'Benjamin Franklin'],
       correctAnswer: 1,
+      difficulty: 'easy',
       explanation: 'George Washington served as the first U.S. President from 1789 to 1797.'
     },
     {
@@ -95,6 +103,7 @@ export const quizData = {
       question: 'Which ancient wonder is still standing today?',
       options: ['Hanging Gardens of Babylon', 'Colossus of Rhodes', 'Great Pyramid of Giza', 'Lighthouse of Alexandria'],
       correctAnswer: 2,
+      difficulty: 'medium',
       explanation: 'The Great Pyramid of Giza is the only ancient wonder that remains largely intact.'
     },
     {
@@ -102,6 +111,7 @@ export const quizData = {
       question: 'What year did the Berlin Wall fall?',
       options: ['1987', '1989', '1991', '1993'],
       correctAnswer: 1,
+      difficulty: 'hard',
       explanation: 'The Berlin Wall fell on November 9, 1989, marking the end of the Cold War era.'
     },
     {
@@ -109,6 +119,7 @@ export const quizData = {
       question: 'Who was the first person to walk on the moon?',
       options: ['Buzz Aldrin', 'Neil Armstrong', 'Yuri Gagarin', 'Alan Shepard'],
       correctAnswer: 1,
+      difficulty: 'easy',
       explanation: 'Neil Armstrong stepped onto the lunar surface on July 20, 1969.'
     },
     {
@@ -116,6 +127,7 @@ export const quizData = {
       question: 'Which empire built Machu Picchu?',
       options: ['Aztec', 'Maya', 'Inca', 'Olmec'],
       correctAnswer: 2,
+      difficulty: 'medium',
       explanation: 'Machu Picchu was built by the Inca Empire in the 15th century in Peru.'
     },
     {
@@ -123,6 +135,7 @@ export const quizData = {
       question: 'In what year did the Titanic sink?',
       options: ['1910', '1912', '1914', '1916'],
       correctAnswer: 1,
+      difficulty: 'hard',
       explanation: 'The RMS Titanic sank on April 15, 1912, after hitting an iceberg.'
     },
     {
@@ -130,6 +143,7 @@ export const quizData = {
       question: 'Who painted the Mona Lisa?',
       options: ['Michelangelo', 'Leonardo da Vinci', 'Raphael', 'Donatello'],
       correctAnswer: 1,
+      difficulty: 'easy',
       explanation: 'Leonardo da Vinci painted the Mona Lisa between 1503 and 1519.'
     },
     {
@@ -137,6 +151,7 @@ export const quizData = {
       question: 'Which civilization invented paper?',
       options: ['Romans', 'Egyptians', 'Chinese', 'Greeks'],
       correctAnswer: 2,
+      difficulty: 'hard',
       explanation: 'Paper was invented in ancient China around 105 CE by Cai Lun.'
     },
     {
@@ -144,6 +159,7 @@ export const quizData = {
       question: 'What was the name of the ship on which the Pilgrims traveled to America?',
       options: ['Mayflower', 'Santa Maria', 'Speedwell', 'Discovery'],
       correctAnswer: 0,
+      difficulty: 'easy',
       explanation: 'The Mayflower carried Pilgrims to Plymouth, Massachusetts in 1620.'
     }
   ],
@@ -153,6 +169,7 @@ export const quizData = {
       question: 'What does HTML stand for?',
       options: ['Hyper Text Markup Language', 'High Tech Modern Language', 'Home Tool Markup Language', 'Hyperlinks and Text Markup Language'],
       correctAnswer: 0,
+      difficulty: 'medium',
       explanation: 'HTML stands for Hyper Text Markup Language and is used to structure web pages.'
     },
     {
@@ -160,6 +177,7 @@ export const quizData = {
       question: 'Who is known as the father of computers?',
       options: ['Bill Gates', 'Steve Jobs', 'Charles Babbage', 'Alan Turing'],
       correctAnswer: 2,
+      difficulty: 'medium',
       explanation: 'Charles Babbage designed the first mechanical computer, the Analytical Engine.'
     },
     {
@@ -167,6 +185,7 @@ export const quizData = {
       question: 'What year was the first iPhone released?',
       options: ['2005', '2006', '2007', '2008'],
       correctAnswer: 2,
+      difficulty: 'hard',
       explanation: 'Apple released the first iPhone on June 29, 2007.'
     },
     {
@@ -174,6 +193,7 @@ export const quizData = {
       question: 'What does CPU stand for?',
       options: ['Central Processing Unit', 'Computer Personal Unit', 'Central Processor Union', 'Core Processing Unit'],
       correctAnswer: 0,
+      difficulty: 'easy',
       explanation: 'CPU stands for Central Processing Unit, often called the "brain" of the computer.'
     },
     {
@@ -181,6 +201,7 @@ export const quizData = {
       question: 'Which programming language is known as the "language of the web"?',
       options: ['Python', 'Java', 'JavaScript', 'C++'],
       correctAnswer: 2,
+      difficulty: 'easy',
       explanation: 'JavaScript is essential for web development and runs in all modern browsers.'
     },
     {
@@ -188,6 +209,7 @@ export const quizData = {
       question: 'What does USB stand for?',
       options: ['Universal Serial Bus', 'United System Base', 'Universal System Board', 'Uniform Serial Bit'],
       correctAnswer: 0,
+      difficulty: 'medium',
       explanation: 'USB stands for Universal Serial Bus, a standard for connecting devices.'
     },
     {
@@ -195,6 +217,7 @@ export const quizData = {
       question: 'Who founded Microsoft?',
       options: ['Steve Jobs', 'Bill Gates and Paul Allen', 'Mark Zuckerberg', 'Larry Page'],
       correctAnswer: 1,
+      difficulty: 'medium',
       explanation: 'Bill Gates and Paul Allen founded Microsoft in 1975.'
     },
     {
@@ -202,6 +225,7 @@ export const quizData = {
       question: 'What is the largest tech company by market cap (as of 2024)?',
       options: ['Microsoft', 'Apple', 'Google', 'Amazon'],
       correctAnswer: 1,
+      difficulty: 'hard',
       explanation: 'Apple has consistently been among the most valuable companies in the world.'
     },
     {
@@ -209,6 +233,7 @@ export const quizData = {
       question: 'What does AI stand for?',
       options: ['Automated Intelligence', 'Artificial Intelligence', 'Advanced Interface', 'Automated Interface'],
       correctAnswer: 1,
+      difficulty: 'easy',
       explanation: 'AI stands for Artificial Intelligence, simulating human intelligence in machines.'
     },
     {
@@ -216,6 +241,7 @@ export const quizData = {
       question: 'Which company developed the Android operating system?',
       options: ['Apple', 'Microsoft', 'Google', 'Samsung'],
       correctAnswer: 2,
+      difficulty: 'medium',
       explanation: 'Google acquired Android Inc. in 2005 and developed it into the OS we know today.'
     }
   ],
@@ -225,6 +251,7 @@ export const quizData = {
       question: 'Who wrote "Romeo and Juliet"?',
       options: ['Charles Dickens', 'William Shakespeare', 'Jane Austen', 'Mark Twain'],
       correctAnswer: 1,
+      difficulty: 'easy',
       explanation: 'William Shakespeare wrote this tragic play in the early years of his career.'
     },
     {
@@ -232,6 +259,7 @@ export const quizData = {
       question: 'What is the first book in the Harry Potter series?',
       options: ['Chamber of Secrets', 'Prisoner of Azkaban', 'Philosopher\'s Stone', 'Goblet of Fire'],
       correctAnswer: 2,
+      difficulty: 'easy',
       explanation: 'Harry Potter and the Philosopher\'s Stone (Sorcerer\'s Stone in the US) was published in 1997.'
     },
     {
@@ -239,6 +267,7 @@ export const quizData = {
       question: 'Who wrote "1984"?',
       options: ['Aldous Huxley', 'George Orwell', 'Ray Bradbury', 'Kurt Vonnegut'],
       correctAnswer: 1,
+      difficulty: 'easy',
       explanation: 'George Orwell published this dystopian novel in 1949.'
     },
     {
@@ -246,6 +275,7 @@ export const quizData = {
       question: 'Which author created Sherlock Holmes?',
       options: ['Agatha Christie', 'Arthur Conan Doyle', 'Edgar Allan Poe', 'Charles Dickens'],
       correctAnswer: 1,
+      difficulty: 'medium',
       explanation: 'Sir Arthur Conan Doyle created the detective Sherlock Holmes in 1887.'
     },
     {
@@ -253,6 +283,7 @@ export const quizData = {
       question: 'What is the longest novel ever written?',
       options: ['War and Peace', 'In Search of Lost Time', 'Clarissa', 'Atlas Shrugged'],
       correctAnswer: 1,
+      difficulty: 'hard',
       explanation: 'Marcel Proust\'s "In Search of Lost Time" has around 1.5 million words.'
     },
     {
@@ -260,6 +291,7 @@ export const quizData = {
       question: 'Who wrote "Pride and Prejudice"?',
       options: ['Charlotte Brontë', 'Emily Brontë', 'Jane Austen', 'Mary Shelley'],
       correctAnswer: 2,
+      difficulty: 'medium',
       explanation: 'Jane Austen published this classic romance novel in 1813.'
     },
     {
@@ -267,6 +299,7 @@ export const quizData = {
       question: 'In which language was "Don Quixote" originally written?',
       options: ['French', 'Italian', 'Portuguese', 'Spanish'],
       correctAnswer: 3,
+      difficulty: 'medium',
       explanation: 'Miguel de Cervantes wrote Don Quixote in Spanish in the early 1600s.'
     },
     {
@@ -274,6 +307,7 @@ export const quizData = {
       question: 'Who wrote "The Great Gatsby"?',
       options: ['Ernest Hemingway', 'F. Scott Fitzgerald', 'John Steinbeck', 'William Faulkner'],
       correctAnswer: 1,
+      difficulty: 'medium',
       explanation: 'F. Scott Fitzgerald published this American classic in 1925.'
     },
     {
@@ -281,6 +315,7 @@ export const quizData = {
       question: 'What is the best-selling book of all time (excluding religious texts)?',
       options: ['Don Quixote', 'A Tale of Two Cities', 'The Lord of the Rings', 'Harry Potter series'],
       correctAnswer: 1,
+      difficulty: 'hard',
       explanation: 'Charles Dickens\' "A Tale of Two Cities" has sold over 200 million copies.'
     },
     {
@@ -288,6 +323,7 @@ export const quizData = {
       question: 'Who wrote "To Kill a Mockingbird"?',
       options: ['Harper Lee', 'Truman Capote', 'Maya Angelou', 'Toni Morrison'],
       correctAnswer: 0,
+      difficulty: 'medium',
       explanation: 'Harper Lee published this Pulitzer Prize-winning novel in 1960.'
     }
   ],
@@ -297,6 +333,7 @@ export const quizData = {
       question: 'What is the capital of Australia?',
       options: ['Sydney', 'Melbourne', 'Canberra', 'Brisbane'],
       correctAnswer: 2,
+      difficulty: 'medium',
       explanation: 'Canberra was purpose-built to be Australia\'s capital city.'
     },
     {
@@ -304,6 +341,7 @@ export const quizData = {
       question: 'Which is the largest continent?',
       options: ['Africa', 'Asia', 'North America', 'Europe'],
       correctAnswer: 1,
+      difficulty: 'easy',
       explanation: 'Asia is the largest continent, covering about 30% of Earth\'s land area.'
     },
     {
@@ -311,6 +349,7 @@ export const quizData = {
       question: 'What is the longest river in the world?',
       options: ['Amazon', 'Nile', 'Yangtze', 'Mississippi'],
       correctAnswer: 1,
+      difficulty: 'medium',
       explanation: 'The Nile River stretches about 6,650 km through northeastern Africa.'
     },
     {
@@ -318,6 +357,7 @@ export const quizData = {
       question: 'Which country has the most natural lakes?',
       options: ['United States', 'Canada', 'Russia', 'Finland'],
       correctAnswer: 1,
+      difficulty: 'hard',
       explanation: 'Canada has more lakes than any other country, with over 2 million.'
     },
     {
@@ -325,6 +365,7 @@ export const quizData = {
       question: 'What is the smallest country in the world?',
       options: ['Monaco', 'Vatican City', 'San Marino', 'Liechtenstein'],
       correctAnswer: 1,
+      difficulty: 'hard',
       explanation: 'Vatican City is about 0.44 square kilometers, the smallest independent state.'
     },
     {
@@ -332,6 +373,7 @@ export const quizData = {
       question: 'Which desert is the largest hot desert in the world?',
       options: ['Gobi', 'Kalahari', 'Sahara', 'Arabian'],
       correctAnswer: 2,
+      difficulty: 'easy',
       explanation: 'The Sahara Desert covers most of North Africa, about 9 million square km.'
     },
     {
@@ -339,6 +381,7 @@ export const quizData = {
       question: 'Mount Everest is located on the border of which two countries?',
       options: ['India and China', 'Nepal and China', 'Nepal and India', 'Bhutan and China'],
       correctAnswer: 1,
+      difficulty: 'medium',
       explanation: 'Mount Everest sits on the border between Nepal and Tibet (China).'
     },
     {
@@ -346,6 +389,7 @@ export const quizData = {
       question: 'Which ocean is the deepest?',
       options: ['Atlantic', 'Indian', 'Pacific', 'Arctic'],
       correctAnswer: 2,
+      difficulty: 'easy',
       explanation: 'The Pacific Ocean\'s Mariana Trench is the deepest point on Earth.'
     },
     {
@@ -353,6 +397,7 @@ export const quizData = {
       question: 'What is the capital of Canada?',
       options: ['Toronto', 'Vancouver', 'Montreal', 'Ottawa'],
       correctAnswer: 3,
+      difficulty: 'medium',
       explanation: 'Ottawa is Canada\'s capital, located in Ontario.'
     },
     {
@@ -360,6 +405,7 @@ export const quizData = {
       question: 'Which country has the most time zones?',
       options: ['Russia', 'United States', 'France', 'China'],
       correctAnswer: 2,
+      difficulty: 'hard',
       explanation: 'France has 12 time zones due to its overseas territories.'
     }
   ],
@@ -369,6 +415,7 @@ export const quizData = {
       question: 'How many colors are in a rainbow?',
       options: ['5', '6', '7', '8'],
       correctAnswer: 2,
+      difficulty: 'easy',
       explanation: 'A rainbow has 7 colors: red, orange, yellow, green, blue, indigo, and violet.'
     },
     {
@@ -376,6 +423,7 @@ export const quizData = {
       question: 'What is the largest mammal in the world?',
       options: ['African Elephant', 'Blue Whale', 'Giraffe', 'Polar Bear'],
       correctAnswer: 1,
+      difficulty: 'easy',
       explanation: 'The blue whale can grow up to 100 feet long and weigh 200 tons.'
     },
     {
@@ -383,6 +431,7 @@ export const quizData = {
       question: 'How many sides does a hexagon have?',
       options: ['5', '6', '7', '8'],
       correctAnswer: 1,
+      difficulty: 'easy',
       explanation: 'A hexagon is a polygon with 6 sides and 6 angles.'
     },
     {
@@ -390,6 +439,7 @@ export const quizData = {
       question: 'What is the currency of Japan?',
       options: ['Yuan', 'Won', 'Yen', 'Ringgit'],
       correctAnswer: 2,
+      difficulty: 'medium',
       explanation: 'The Japanese yen has been the official currency since 1871.'
     },
     {
@@ -397,6 +447,7 @@ export const quizData = {
       question: 'How many days are in a leap year?',
       options: ['364', '365', '366', '367'],
       correctAnswer: 2,
+      difficulty: 'easy',
       explanation: 'A leap year has 366 days, occurring every 4 years (with some exceptions).'
     },
     {
@@ -404,6 +455,7 @@ export const quizData = {
       question: 'What is the fastest land animal?',
       options: ['Lion', 'Cheetah', 'Gazelle', 'Greyhound'],
       correctAnswer: 1,
+      difficulty: 'easy',
       explanation: 'The cheetah can reach speeds of up to 70 mph (112 km/h).'
     },
     {
@@ -411,6 +463,7 @@ export const quizData = {
       question: 'How many strings does a standard guitar have?',
       options: ['4', '5', '6', '7'],
       correctAnswer: 2,
+      difficulty: 'medium',
       explanation: 'A standard guitar has 6 strings, tuned E-A-D-G-B-E.'
     },
     {
@@ -418,6 +471,7 @@ export const quizData = {
       question: 'What is the boiling point of water at sea level?',
       options: ['90°C', '100°C', '110°C', '120°C'],
       correctAnswer: 1,
+      difficulty: 'medium',
       explanation: 'Water boils at 100°C (212°F) at standard atmospheric pressure.'
     },
     {
@@ -425,6 +479,7 @@ export const quizData = {
       question: 'How many continents are there?',
       options: ['5', '6', '7', '8'],
       correctAnswer: 2,
+      difficulty: 'easy',
       explanation: 'There are 7 continents: Africa, Antarctica, Asia, Europe, North America, Oceania, and South America.'
     },
     {
@@ -432,6 +487,7 @@ export const quizData = {
       question: 'What is the largest planet in our solar system?',
       options: ['Saturn', 'Jupiter', 'Neptune', 'Uranus'],
       correctAnswer: 1,
+      difficulty: 'easy',
       explanation: 'Jupiter is the largest planet, with a mass more than twice that of all other planets combined.'
     }
   ]
