@@ -52,7 +52,7 @@ function QuizSession() {
   if (!currentQuiz) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-2xl text-gray-600">Loading quiz...</div>
+        <div className="text-2xl text-white">Loading quiz...</div>
       </div>
     )
   }
@@ -84,7 +84,7 @@ function QuizSession() {
     if (index === selectedAnswer && selectedAnswer !== currentQuestion.correctAnswer) {
       return 'quiz-option quiz-option-incorrect'
     }
-    return 'quiz-option border-gray-200 bg-gray-50'
+    return 'quiz-option border-slate-600 bg-slate-700/30'
   }
 
   return (
@@ -96,23 +96,23 @@ function QuizSession() {
             <span className="text-2xl">{categoryInfo.icon}</span>
             <span className="font-bold text-lg">{categoryInfo.name}</span>
           </div>
-          <div className="flex justify-between items-center text-sm text-gray-600 max-w-2xl mx-auto">
+          <div className="flex justify-between items-center text-sm text-gray-300 max-w-2xl mx-auto">
             <span>Question {currentQuestionIndex + 1} of {currentQuiz.questions.length}</span>
             <span>{Math.round(progress)}% Complete</span>
           </div>
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full bg-gray-200 rounded-full h-3 mb-8 overflow-hidden shadow-inner">
+        <div className="w-full bg-slate-700 rounded-full h-3 mb-8 overflow-hidden shadow-inner">
           <div
-            className="bg-gradient-to-r from-primary-500 to-primary-600 h-3 rounded-full transition-all duration-500 ease-out"
+            className="bg-gradient-to-r from-indigo-500 to-purple-600 h-3 rounded-full transition-all duration-500 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
 
         {/* Question Card */}
         <div className="card max-w-3xl mx-auto mb-6 animate-fade-in">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 leading-relaxed">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 leading-relaxed">
             {currentQuestion.question}
           </h2>
 
@@ -126,10 +126,10 @@ function QuizSession() {
                 className={getOptionClass(index)}
               >
                 <div className="flex items-center gap-3">
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-700">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center font-bold text-white">
                     {String.fromCharCode(65 + index)}
                   </span>
-                  <span className="text-left font-medium">{option}</span>
+                  <span className="text-left font-medium text-white">{option}</span>
                   {selectedAnswer !== null && index === currentQuestion.correctAnswer && (
                     <span className="ml-auto text-2xl">✓</span>
                   )}
@@ -143,9 +143,9 @@ function QuizSession() {
 
           {/* Explanation */}
           {showExplanation && (
-            <div className="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded animate-slide-up">
-              <p className="text-sm font-semibold text-blue-800 mb-1">Explanation:</p>
-              <p className="text-gray-700">{currentQuestion.explanation}</p>
+            <div className="mt-6 p-4 bg-blue-900/30 border-l-4 border-blue-400 rounded animate-slide-up">
+              <p className="text-sm font-semibold text-blue-300 mb-1">Explanation:</p>
+              <p className="text-gray-200">{currentQuestion.explanation}</p>
             </div>
           )}
         </div>
@@ -163,7 +163,7 @@ function QuizSession() {
         <div className="text-center mt-6">
           <button
             onClick={handleQuitClick}
-            className="text-gray-500 hover:text-gray-700 text-sm"
+            className="text-gray-400 hover:text-white text-sm transition-colors"
           >
             ← Quit Quiz
           </button>
