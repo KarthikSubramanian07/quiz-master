@@ -96,7 +96,7 @@ function Home() {
         <header className="text-center mb-12 animate-fade-in">
           <div className="flex items-center justify-center gap-4 mb-4">
             <img
-              src="/logo2.png"
+              src="/logo3.png"
               alt="QuizMaster Logo"
               className="h-20 md:h-24 w-auto object-contain drop-shadow-2xl"
             />
