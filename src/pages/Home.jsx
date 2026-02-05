@@ -94,9 +94,16 @@ function Home() {
 
         {/* Header */}
         <header className="text-center mb-12 animate-fade-in">
-          <h1 className="text-6xl md:text-8xl font-black mb-4 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-2xl">
-            QuizMaster
-          </h1>
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <img
+              src="/logo.png"
+              alt="QuizMaster Logo"
+              className="h-20 md:h-24 w-auto object-contain drop-shadow-2xl"
+            />
+            <h1 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-2xl">
+              QuizMaster
+            </h1>
+          </div>
           <p className="text-2xl text-gray-300 mb-10 font-medium">
             Choose your challenge and test your knowledge!
           </p>
