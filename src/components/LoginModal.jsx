@@ -34,7 +34,7 @@ function LoginModal({ isOpen, onClose }) {
       <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 max-w-md w-full shadow-2xl animate-slide-up border border-purple-500/30">
         <div className="text-center mb-8">
           <img
-            src="/logo.png"
+            src="/logo2.png"
             alt="QuizMaster Logo"
             className="h-20 w-auto mx-auto mb-4 drop-shadow-2xl"
           />
