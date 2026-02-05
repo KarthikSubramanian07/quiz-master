@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
-import { isFirebaseEnabled } from '../firebase/config'
+import { auth, googleProvider, isFirebaseEnabled } from '../firebase/config'
 
 const AuthContext = createContext()
 
@@ -33,19 +33,36 @@ export const AuthProvider = ({ children }) => {
 
   const signInWithGoogle = async () => {
     try {
-      // Check if Firebase is available
+      // Check if Firebase is configured
       if (!isFirebaseEnabled) {
         throw new Error('Firebase not configured. Please set up Firebase or use Guest mode.')
       }
 
-      // Firebase is not installed - show friendly error
-      return {
-        success: false,
-        error: 'Google sign-in requires Firebase setup. Please use Guest mode or follow FIREBASE_SETUP.md'
+      // Import signInWithPopup dynamically to avoid errors if Firebase not configured
+      const { signInWithPopup } = await import('firebase/auth')
+
+      // Sign in with Google popup
+      const result = await signInWithPopup(auth, googleProvider)
+
+      const userData = {
+        uid: result.user.uid,
+        email: result.user.email,
+        displayName: result.user.displayName,
+        photoURL: result.user.photoURL,
+        isGuest: false
       }
+
+      setUser(userData)
+      setIsGuest(false)
+      localStorage.setItem('quizmaster_user', JSON.stringify(userData))
+
+      return { success: true, user: userData }
     } catch (error) {
       console.error('Error signing in with Google:', error)
-      return { success: false, error: error.message }
+      return {
+        success: false,
+        error: error.message || 'Google sign-in requires Firebase setup. Please use Guest mode or follow FIREBASE_SETUP.md'
+      }
     }
   }
 

@@ -1,27 +1,48 @@
 // Firebase configuration (OPTIONAL)
-// To enable Firebase:
-// 1. Run: npm install firebase
-// 2. Create a Firebase project at https://console.firebase.google.com/
-// 3. Enable Google Authentication in Firebase Console
-// 4. Uncomment and update the config below with your project's config
+// Firebase package is already installed ✅
+//
+// To enable Google Sign-in:
+// 1. Create a Firebase project at https://console.firebase.google.com/
+// 2. Enable Google Authentication in Firebase Console
+// 3. Get your config from Project Settings > General > Your apps
+// 4. Replace the firebaseConfig below with your actual values
 
-// const firebaseConfig = {
-//   apiKey: "YOUR_API_KEY",
-//   authDomain: "YOUR_AUTH_DOMAIN",
-//   projectId: "YOUR_PROJECT_ID",
-//   storageBucket: "YOUR_STORAGE_BUCKET",
-//   messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-//   appId: "YOUR_APP_ID"
-// }
+import { initializeApp } from 'firebase/app'
+import { getAuth, GoogleAuthProvider } from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
 
-// Initialize as null by default (guest mode)
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
+}
+
+// Initialize Firebase variables
 let auth = null
 let db = null
 let googleProvider = null
+let isFirebaseEnabled = false
 
-// Firebase is optional - app works without it
-export { auth, db, googleProvider }
-export const isFirebaseEnabled = false
+// Only initialize if user has set up their Firebase project
+if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
+  try {
+    const app = initializeApp(firebaseConfig)
+    auth = getAuth(app)
+    db = getFirestore(app)
+    googleProvider = new GoogleAuthProvider()
+    isFirebaseEnabled = true
+    console.log('✅ Firebase initialized successfully - Google sign-in enabled')
+  } catch (error) {
+    console.error('⚠️ Firebase initialization failed:', error.message)
+    console.log('📝 Check your Firebase configuration in src/firebase/config.js')
+  }
+} else {
+  console.log('ℹ️ Firebase not configured - running in Guest mode only')
+  console.log('📝 To enable Google sign-in, update src/firebase/config.js')
+  console.log('📖 See FIREBASE_SETUP.md for instructions')
+}
 
-// Note: To enable Firebase, install the package and update the config above
-// The app will work perfectly in guest mode without Firebase!
+export { auth, db, googleProvider, isFirebaseEnabled }
