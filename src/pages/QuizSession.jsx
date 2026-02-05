@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuiz } from '../context/QuizContext'
+import ConfirmModal from '../components/ConfirmModal'
 
 function QuizSession() {
   const { categoryId } = useParams()
@@ -14,8 +15,11 @@ function QuizSession() {
     finishQuiz,
     getCurrentQuestion,
     showExplanation,
-    selectedAnswer
+    selectedAnswer,
+    resetQuiz
   } = useQuiz()
+
+  const [showQuitModal, setShowQuitModal] = useState(false)
 
   useEffect(() => {
     if (!currentQuiz) {
@@ -34,6 +38,15 @@ function QuizSession() {
     } else {
       nextQuestion()
     }
+  }
+
+  const handleQuitClick = () => {
+    setShowQuitModal(true)
+  }
+
+  const handleConfirmQuit = () => {
+    resetQuiz()
+    navigate('/')
   }
 
   if (!currentQuiz) {
@@ -149,13 +162,22 @@ function QuizSession() {
         {/* Quit Button */}
         <div className="text-center mt-6">
           <button
-            onClick={() => navigate('/')}
+            onClick={handleQuitClick}
             className="text-gray-500 hover:text-gray-700 text-sm"
           >
             ← Quit Quiz
           </button>
         </div>
       </div>
+
+      {/* Quit Confirmation Modal */}
+      <ConfirmModal
+        isOpen={showQuitModal}
+        onClose={() => setShowQuitModal(false)}
+        onConfirm={handleConfirmQuit}
+        title="Quit Quiz?"
+        message="Your progress will be lost if you quit now. Are you sure you want to leave?"
+      />
     </div>
   )
 }

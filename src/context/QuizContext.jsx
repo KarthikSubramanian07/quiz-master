@@ -22,6 +22,7 @@ export const QuizProvider = ({ children }) => {
   const [showExplanation, setShowExplanation] = useState(false)
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [newAchievements, setNewAchievements] = useState([])
+  const [difficulty, setDifficulty] = useState('all')
 
   useEffect(() => {
     loadData()
@@ -34,11 +35,13 @@ export const QuizProvider = ({ children }) => {
     setStats(allStats)
   }
 
-  const startQuiz = (category, questionCount = 10) => {
-    const questions = getRandomQuestions(category, questionCount)
+  const startQuiz = (category, questionCount = 10, quizDifficulty = null) => {
+    const selectedDifficulty = quizDifficulty || difficulty
+    const questions = getRandomQuestions(category, questionCount, selectedDifficulty)
     setCurrentQuiz({
       category,
       questions,
+      difficulty: selectedDifficulty,
       startTime: Date.now()
     })
     setCurrentQuestionIndex(0)
@@ -123,6 +126,7 @@ export const QuizProvider = ({ children }) => {
     showExplanation,
     selectedAnswer,
     newAchievements,
+    difficulty,
     startQuiz,
     answerQuestion,
     nextQuestion,
@@ -130,7 +134,8 @@ export const QuizProvider = ({ children }) => {
     resetQuiz,
     getCurrentQuestion,
     loadData,
-    setNewAchievements
+    setNewAchievements,
+    setDifficulty
   }
 
   return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>

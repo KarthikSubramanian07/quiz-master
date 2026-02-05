@@ -5,6 +5,7 @@ export const quizData = {
       question: 'What is the powerhouse of the cell?',
       options: ['Nucleus', 'Mitochondria', 'Ribosome', 'Chloroplast'],
       correctAnswer: 1,
+      difficulty: 'easy',
       explanation: 'Mitochondria are known as the powerhouse of the cell because they generate most of the cell\'s ATP, which is used as a source of chemical energy.'
     },
     {
@@ -12,6 +13,7 @@ export const quizData = {
       question: 'What is the chemical symbol for gold?',
       options: ['Go', 'Au', 'Gd', 'Ag'],
       correctAnswer: 1,
+      difficulty: 'easy',
       explanation: 'Au comes from the Latin word "aurum" meaning gold.'
     },
     {
@@ -19,6 +21,7 @@ export const quizData = {
       question: 'What is the speed of light in vacuum?',
       options: ['300,000 km/s', '150,000 km/s', '450,000 km/s', '200,000 km/s'],
       correctAnswer: 0,
+      difficulty: 'medium',
       explanation: 'The speed of light in vacuum is approximately 299,792 km/s, commonly rounded to 300,000 km/s.'
     },
     {
@@ -26,6 +29,7 @@ export const quizData = {
       question: 'Which planet is known as the Red Planet?',
       options: ['Venus', 'Jupiter', 'Mars', 'Saturn'],
       correctAnswer: 2,
+      difficulty: 'easy',
       explanation: 'Mars appears red due to iron oxide (rust) on its surface.'
     },
     {
@@ -437,8 +441,19 @@ export const getCategoryQuestions = (categoryId) => {
   return quizData[categoryId] || []
 }
 
-export const getRandomQuestions = (categoryId, count = 10) => {
-  const questions = getCategoryQuestions(categoryId)
+export const getRandomQuestions = (categoryId, count = 10, difficulty = 'all') => {
+  let questions = getCategoryQuestions(categoryId)
+
+  // Filter by difficulty if specified
+  if (difficulty !== 'all') {
+    questions = questions.filter(q => (q.difficulty || 'medium') === difficulty)
+  }
+
+  // If not enough questions of that difficulty, fall back to all
+  if (questions.length < count) {
+    questions = getCategoryQuestions(categoryId)
+  }
+
   const shuffled = [...questions].sort(() => 0.5 - Math.random())
   return shuffled.slice(0, Math.min(count, questions.length))
 }
