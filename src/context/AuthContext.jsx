@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
+import { isFirebaseEnabled } from '../firebase/config'
 
 const AuthContext = createContext()
 
@@ -33,28 +34,15 @@ export const AuthProvider = ({ children }) => {
   const signInWithGoogle = async () => {
     try {
       // Check if Firebase is available
-      const { auth, googleProvider, isFirebaseEnabled } = require('../firebase/config')
-
       if (!isFirebaseEnabled) {
-        throw new Error('Firebase not configured')
+        throw new Error('Firebase not configured. Please set up Firebase or use Guest mode.')
       }
 
-      const { signInWithPopup } = require('firebase/auth')
-      const result = await signInWithPopup(auth, googleProvider)
-
-      const userData = {
-        uid: result.user.uid,
-        email: result.user.email,
-        displayName: result.user.displayName,
-        photoURL: result.user.photoURL,
-        isGuest: false
+      // Firebase is not installed - show friendly error
+      return {
+        success: false,
+        error: 'Google sign-in requires Firebase setup. Please use Guest mode or follow FIREBASE_SETUP.md'
       }
-
-      setUser(userData)
-      setIsGuest(false)
-      localStorage.setItem('quizmaster_user', JSON.stringify(userData))
-
-      return { success: true, user: userData }
     } catch (error) {
       console.error('Error signing in with Google:', error)
       return { success: false, error: error.message }
