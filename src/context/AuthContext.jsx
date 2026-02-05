@@ -17,18 +17,54 @@ export const AuthProvider = ({ children }) => {
   const [isGuest, setIsGuest] = useState(true)
 
   useEffect(() => {
-    // Check if user was previously logged in
-    const savedUser = localStorage.getItem('quizmaster_user')
-    if (savedUser) {
-      try {
-        const userData = JSON.parse(savedUser)
-        setUser(userData)
-        setIsGuest(userData.isGuest || false)
-      } catch (error) {
-        console.error('Error loading user data:', error)
+    // Listen to Firebase auth state changes
+    if (isFirebaseEnabled && auth) {
+      const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
+        if (firebaseUser) {
+          // User is signed in with Google
+          const userData = {
+            uid: firebaseUser.uid,
+            email: firebaseUser.email,
+            displayName: firebaseUser.displayName,
+            photoURL: firebaseUser.photoURL,
+            isGuest: false
+          }
+          setUser(userData)
+          setIsGuest(false)
+          localStorage.setItem('quizmaster_user', JSON.stringify(userData))
+        } else {
+          // User is signed out - check for guest mode
+          const savedUser = localStorage.getItem('quizmaster_user')
+          if (savedUser) {
+            try {
+              const userData = JSON.parse(savedUser)
+              if (userData.isGuest) {
+                setUser(userData)
+                setIsGuest(true)
+              }
+            } catch (error) {
+              console.error('Error loading user data:', error)
+            }
+          }
+        }
+        setLoading(false)
+      })
+
+      return () => unsubscribe()
+    } else {
+      // Firebase not enabled - check localStorage for guest
+      const savedUser = localStorage.getItem('quizmaster_user')
+      if (savedUser) {
+        try {
+          const userData = JSON.parse(savedUser)
+          setUser(userData)
+          setIsGuest(userData.isGuest || false)
+        } catch (error) {
+          console.error('Error loading user data:', error)
+        }
       }
+      setLoading(false)
     }
-    setLoading(false)
   }, [])
 
   const signInWithGoogle = async () => {
@@ -82,7 +118,17 @@ export const AuthProvider = ({ children }) => {
     return { success: true, user: guestUser }
   }
 
-  const signOut = () => {
+  const signOut = async () => {
+    try {
+      // Sign out from Firebase if user is logged in with Google
+      if (isFirebaseEnabled && auth && !isGuest) {
+        const { signOut: firebaseSignOut } = await import('firebase/auth')
+        await firebaseSignOut(auth)
+      }
+    } catch (error) {
+      console.error('Error signing out:', error)
+    }
+
     setUser(null)
     setIsGuest(true)
     localStorage.removeItem('quizmaster_user')
