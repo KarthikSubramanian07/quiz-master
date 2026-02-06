@@ -110,6 +110,15 @@ function QuizSession() {
   return (
     <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
+        {/* Logo */}
+        <div className="mb-6">
+          <img
+            src="/logo3.png"
+            alt="QuizMaster Logo"
+            className="h-12 md:h-14 w-auto object-contain drop-shadow-lg"
+          />
+        </div>
+
         {/* Header */}
         <div className="mb-6 text-center">
           <div className={`inline-flex items-center gap-3 bg-gradient-to-r ${categoryInfo.color} text-white px-6 py-3 rounded-full shadow-lg mb-4`}>

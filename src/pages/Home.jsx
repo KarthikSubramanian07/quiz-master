@@ -63,9 +63,13 @@ function Home() {
   return (
     <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        {/* Top Bar with User Info */}
+        {/* Top Bar with Logo and User Info */}
         <div className="flex justify-between items-center mb-8 animate-fade-in">
-          <div></div>
+          <img
+            src="/logo3.png"
+            alt="QuizMaster Logo"
+            className="h-12 md:h-14 w-auto object-contain drop-shadow-lg"
+          />
           {user && (
             <div className="flex items-center gap-4">
               {!isGuest && (
@@ -101,16 +105,9 @@ function Home() {
 
         {/* Header */}
         <header className="text-center mb-12 animate-fade-in">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <img
-              src="/logo3.png"
-              alt="QuizMaster Logo"
-              className="h-20 md:h-24 w-auto object-contain drop-shadow-2xl"
-            />
-            <h1 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-2xl">
-              QuizMaster
-            </h1>
-          </div>
+          <h1 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-2xl mb-4">
+            QuizMaster
+          </h1>
           <p className="text-2xl text-gray-300 mb-10 font-medium">
             Choose your challenge and test your knowledge!
           </p>

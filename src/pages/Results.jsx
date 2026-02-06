@@ -47,6 +47,15 @@ function Results() {
   return (
     <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
+        {/* Logo */}
+        <div className="mb-6">
+          <img
+            src="/logo3.png"
+            alt="QuizMaster Logo"
+            className="h-12 md:h-14 w-auto object-contain drop-shadow-lg"
+          />
+        </div>
+
         {/* Achievements Popup */}
         {newAchievements.length > 0 && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-fade-in">

@@ -53,6 +53,15 @@ function Stats() {
     return (
       <div className="min-h-screen p-8">
         <div className="max-w-6xl mx-auto">
+          {/* Logo */}
+          <div className="mb-6">
+            <img
+              src="/logo3.png"
+              alt="QuizMaster Logo"
+              className="h-12 md:h-14 w-auto object-contain drop-shadow-lg"
+            />
+          </div>
+
           <header className="text-center mb-12">
             <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">
               Your Stats 📊
@@ -78,6 +87,15 @@ function Stats() {
   return (
     <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
+        {/* Logo */}
+        <div className="mb-6">
+          <img
+            src="/logo3.png"
+            alt="QuizMaster Logo"
+            className="h-12 md:h-14 w-auto object-contain drop-shadow-lg"
+          />
+        </div>
+
         <header className="text-center mb-12 animate-fade-in">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">
             Your Stats 📊
