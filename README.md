@@ -28,30 +28,50 @@ This project represents my belief that **learning should be engaging, motivating
 ```
 quiz-master/
 ├── public/
+│   ├── logo3.png              # App logo
 │   └── quiz-icon.svg          # App favicon
 ├── src/
 │   ├── components/
+│   │   ├── ConfirmModal.jsx   # Confirmation dialog component
+│   │   ├── DifficultySelector.jsx # Difficulty level selector
+│   │   ├── LoginModal.jsx     # Authentication modal
 │   │   └── Loading.jsx        # Loading spinner component
+│   ├── context/
+│   │   ├── AuthContext.jsx    # Authentication state management
+│   │   └── QuizContext.jsx    # Quiz state management
+│   ├── data/
+│   │   ├── quizData.js        # Local quiz questions database
+│   │   └── naqtData.js        # NAQT academic questions dataset
+│   ├── firebase/
+│   │   └── config.js          # Firebase configuration
+│   ├── hooks/
+│   │   └── useActiveQuizUsers.js # Real-time active users tracking
 │   ├── pages/
 │   │   ├── Home.jsx           # Category selection page
 │   │   ├── QuizSession.jsx    # Quiz taking interface
 │   │   ├── Results.jsx        # Results and review page
 │   │   └── Stats.jsx          # Performance dashboard
-│   ├── data/
-│   │   └── quizData.js        # Quiz questions database
-│   ├── context/
-│   │   └── QuizContext.jsx    # Global state management
 │   ├── utils/
-│   │   ├── storage.js         # LocalStorage utilities
-│   │   └── scoring.js         # Scoring and achievements
+│   │   ├── apiNinjasAPI.js    # API Ninjas integration (removed)
+│   │   ├── naqtQuestions.js   # NAQT questions utilities
+│   │   ├── openTriviaAPI.js   # Open Trivia Database integration
+│   │   ├── scoring.js         # Scoring and achievements
+│   │   └── storage.js         # LocalStorage utilities
 │   ├── App.jsx                # Main app component
 │   ├── main.jsx               # App entry point
 │   └── index.css              # Global styles
-├── index.html
-├── package.json
-├── vite.config.js
-├── tailwind.config.js
-└── README.md
+├── .env                       # Environment variables (API keys)
+├── .gitignore                 # Git ignore rules
+├── CHANGELOG.md               # Version history
+├── CONTRIBUTING.md            # Contribution guidelines
+├── FIREBASE_SETUP.md          # Firebase setup instructions
+├── index.html                 # HTML entry point
+├── package.json               # Project dependencies
+├── postcss.config.js          # PostCSS configuration
+├── README.md                  # Project documentation
+├── SETUP_GUIDE.md             # Setup instructions
+├── tailwind.config.js         # Tailwind CSS configuration
+└── vite.config.js             # Vite build configuration
 ```
 
 ## Getting Started 🚀
