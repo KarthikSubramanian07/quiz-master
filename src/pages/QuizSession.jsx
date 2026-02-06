@@ -26,6 +26,11 @@ function QuizSession() {
 
   useEffect(() => {
     if (!currentQuiz) {
+      // For open-trivia and naqt, redirect to home if quiz not started
+      if (categoryId === 'open-trivia' || categoryId === 'naqt') {
+        navigate('/')
+        return
+      }
       startQuiz(categoryId, 10)
     }
   }, [])
@@ -87,7 +92,9 @@ function QuizSession() {
       technology: { name: 'Technology', icon: '💻', color: 'from-blue-400 to-indigo-600' },
       literature: { name: 'Literature & Arts', icon: '📚', color: 'from-purple-400 to-pink-600' },
       geography: { name: 'Geography', icon: '🌍', color: 'from-cyan-400 to-teal-600' },
-      general: { name: 'General Knowledge', icon: '🎯', color: 'from-red-400 to-rose-600' }
+      general: { name: 'General Knowledge', icon: '🎯', color: 'from-red-400 to-rose-600' },
+      naqt: { name: 'NAQT Academic Questions', icon: '🏆', color: 'from-yellow-400 to-orange-600' },
+      'open-trivia': { name: 'Open Trivia Database', icon: '🌐', color: 'from-purple-400 to-pink-600' }
     }
     return categories[categoryId] || { name: categoryId, icon: '❓', color: 'from-gray-400 to-gray-600' }
   }

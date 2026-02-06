@@ -5,13 +5,20 @@ import { useAuth } from '../context/AuthContext'
 import DifficultySelector from '../components/DifficultySelector'
 import LoginModal from '../components/LoginModal'
 import { useActiveQuizUsers } from '../hooks/useActiveQuizUsers'
+import { fetchOpenTriviaQuestions, OPEN_TRIVIA_CATEGORIES } from '../utils/openTriviaAPI'
+import { getNAQTQuestions, getNAQTQuestionCount } from '../utils/naqtQuestions'
 
 function Home() {
   const navigate = useNavigate()
-  const { difficulty, setDifficulty } = useQuiz()
+  const { difficulty, setDifficulty, startQuizWithQuestions } = useQuiz()
   const { user, signOut, isGuest } = useAuth()
   const [showLoginModal, setShowLoginModal] = useState(false)
   const activeCounts = useActiveQuizUsers()
+
+  // Open Trivia state
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [isLoadingTrivia, setIsLoadingTrivia] = useState(false)
+  const [triviaError, setTriviaError] = useState(null)
 
   // No automatic login modal - users start as guest by default
 
@@ -59,6 +66,37 @@ function Home() {
       color: 'from-red-400 to-rose-600'
     }
   ]
+
+  const handleStartOpenTrivia = async () => {
+    setIsLoadingTrivia(true)
+    setTriviaError(null)
+
+    try {
+      const result = await fetchOpenTriviaQuestions(10, selectedCategory, difficulty)
+
+      if (result.success && result.questions.length > 0) {
+        // Start quiz with fetched questions
+        startQuizWithQuestions('Open Trivia', result.questions, difficulty)
+        navigate('/quiz/open-trivia')
+      } else {
+        setTriviaError(result.error || 'Failed to load questions. Please try again.')
+      }
+    } catch (error) {
+      setTriviaError('Network error. Please check your connection and try again.')
+    } finally {
+      setIsLoadingTrivia(false)
+    }
+  }
+
+  const handleStartNAQT = () => {
+    const questions = getNAQTQuestions(10)
+
+    if (questions.length > 0) {
+      // Always use 'hard' difficulty for NAQT questions
+      startQuizWithQuestions('NAQT', questions, 'hard')
+      navigate('/quiz/naqt')
+    }
+  }
 
   return (
     <div className="min-h-screen p-4 md:p-8">
@@ -166,8 +204,130 @@ function Home() {
           })}
         </div>
 
+        {/* NAQT Section */}
+        <div className="max-w-3xl mx-auto mb-10 animate-fade-in">
+          <div className="card border-2 border-yellow-500/30 hover:border-yellow-500/50 transition-all relative">
+            {/* Active Users Badge */}
+            {activeCounts['naqt'] > 0 && (
+              <div
+                className="absolute top-4 right-4 z-20 flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1.5 rounded-full shadow-lg animate-pulse"
+                title={`${activeCounts['naqt']} ${activeCounts['naqt'] === 1 ? 'user is' : 'users are'} quizzing now`}
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+                </svg>
+                <span className="text-sm font-bold">{activeCounts['naqt']}</span>
+              </div>
+            )}
+
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-yellow-400 to-orange-600 flex items-center justify-center text-3xl shadow-lg">
+                🏆
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-white">NAQT Academic Questions</h3>
+                <p className="text-gray-400 text-sm">Challenge yourself with academic competition questions</p>
+              </div>
+            </div>
+
+            {/* Info Banner */}
+            <div className="mb-4 p-3 bg-yellow-900/20 border border-yellow-500/30 rounded-lg">
+              <div className="flex items-center gap-2 text-yellow-300 text-sm">
+                <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                </svg>
+                <span><strong>Note:</strong> All NAQT questions are randomly chosen from prior papers</span>
+              </div>
+            </div>
+
+            {/* Start Button */}
+            <button
+              onClick={handleStartNAQT}
+              className="w-full py-4 px-6 bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 text-white font-bold rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl hover:shadow-yellow-500/50 transform hover:scale-105 flex items-center justify-center gap-2"
+            >
+              Start NAQT Quiz →
+            </button>
+          </div>
+        </div>
+
+        {/* Open Trivia Database Section */}
+        <div className="max-w-3xl mx-auto mb-10 animate-fade-in">
+          <div className="card border-2 border-purple-500/30 hover:border-purple-500/50 transition-all relative">
+            {/* Active Users Badge */}
+            {activeCounts['open-trivia'] > 0 && (
+              <div
+                className="absolute top-4 right-4 z-20 flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1.5 rounded-full shadow-lg animate-pulse"
+                title={`${activeCounts['open-trivia']} ${activeCounts['open-trivia'] === 1 ? 'user is' : 'users are'} quizzing now`}
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+                </svg>
+                <span className="text-sm font-bold">{activeCounts['open-trivia']}</span>
+              </div>
+            )}
+
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-400 to-pink-600 flex items-center justify-center text-3xl shadow-lg">
+                🌐
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-white">Open Trivia Database</h3>
+                <p className="text-gray-400 text-sm">Thousands of community questions from around the world</p>
+              </div>
+            </div>
+
+            {triviaError && (
+              <div className="mb-4 p-3 bg-red-900/30 border border-red-500/50 rounded-lg text-red-300 text-sm">
+                {triviaError}
+              </div>
+            )}
+
+            <div className="space-y-4">
+              {/* Category Selector */}
+              <div>
+                <label className="block text-gray-300 text-sm font-semibold mb-2">
+                  Category (Optional)
+                </label>
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-white focus:outline-none focus:border-purple-500 transition-colors"
+                  disabled={isLoadingTrivia}
+                >
+                  {OPEN_TRIVIA_CATEGORIES.map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Start Button */}
+              <button
+                onClick={handleStartOpenTrivia}
+                disabled={isLoadingTrivia}
+                className="w-full py-4 px-6 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl hover:shadow-purple-500/50 transform hover:scale-105 disabled:hover:scale-100 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                {isLoadingTrivia ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    Loading Questions...
+                  </>
+                ) : (
+                  <>
+                    Start Open Trivia Quiz →
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* Stats Button */}
-        <div className="text-center">
+        <div className="text-center mt-10">
           <button
             onClick={() => navigate('/stats')}
             className="px-10 py-5 glass-card hover:bg-white/15 text-white font-semibold rounded-2xl shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 transform hover:scale-105 text-lg"

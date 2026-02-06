@@ -50,6 +50,20 @@ export const QuizProvider = ({ children }) => {
     setShowExplanation(false)
   }
 
+  const startQuizWithQuestions = (category, questions, quizDifficulty = null) => {
+    const selectedDifficulty = quizDifficulty || difficulty
+    setCurrentQuiz({
+      category,
+      questions,
+      difficulty: selectedDifficulty,
+      startTime: Date.now()
+    })
+    setCurrentQuestionIndex(0)
+    setUserAnswers([])
+    setSelectedAnswer(null)
+    setShowExplanation(false)
+  }
+
   const answerQuestion = (answerIndex) => {
     if (selectedAnswer !== null) return // Already answered
 
@@ -128,6 +142,7 @@ export const QuizProvider = ({ children }) => {
     newAchievements,
     difficulty,
     startQuiz,
+    startQuizWithQuestions,
     answerQuestion,
     nextQuestion,
     finishQuiz,
