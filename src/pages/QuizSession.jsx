@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuiz } from '../context/QuizContext'
+import { useAuth } from '../context/AuthContext'
 import ConfirmModal from '../components/ConfirmModal'
+import { setActiveQuiz, removeActiveQuiz } from '../hooks/useActiveQuizUsers'
 
 function QuizSession() {
   const { categoryId } = useParams()
   const navigate = useNavigate()
+  const { user } = useAuth()
   const {
     currentQuiz,
     currentQuestionIndex,
@@ -27,12 +30,27 @@ function QuizSession() {
     }
   }, [])
 
+  // Track active quiz session
+  useEffect(() => {
+    if (!currentQuiz || !user) return
+
+    // Set user as active in this category
+    setActiveQuiz(user.uid, categoryId)
+
+    // Clean up when component unmounts or quiz ends
+    return () => {
+      removeActiveQuiz(user.uid, categoryId)
+    }
+  }, [currentQuiz, user, categoryId])
+
   const handleAnswer = (answerIndex) => {
     answerQuestion(answerIndex)
   }
 
   const handleNext = () => {
     if (currentQuestionIndex === currentQuiz.questions.length - 1) {
+      // Remove from active users before finishing
+      removeActiveQuiz(user.uid, categoryId)
       finishQuiz()
       navigate('/results')
     } else {
@@ -45,6 +63,8 @@ function QuizSession() {
   }
 
   const handleConfirmQuit = () => {
+    // Remove from active users when quitting
+    removeActiveQuiz(user.uid, categoryId)
     resetQuiz()
     navigate('/')
   }

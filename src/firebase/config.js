@@ -10,12 +10,14 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth, GoogleAuthProvider } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
+import { getDatabase } from 'firebase/database'
 
 
 
 const firebaseConfig = {
   apiKey: "AIzaSyCLwDxlDJc494KAozBxxkKt3_50ZqgGiF0",
   authDomain: "quiz-master-6db19.firebaseapp.com",
+  databaseURL: "https://quiz-master-6db19-default-rtdb.firebaseio.com",
   projectId: "quiz-master-6db19",
   storageBucket: "quiz-master-6db19.firebasestorage.app",
   messagingSenderId: "764008232044",
@@ -26,6 +28,7 @@ const firebaseConfig = {
 // Initialize Firebase variables
 let auth = null
 let db = null
+let realtimeDb = null
 let googleProvider = null
 let isFirebaseEnabled = false
 
@@ -35,6 +38,7 @@ if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
     const app = initializeApp(firebaseConfig)
     auth = getAuth(app)
     db = getFirestore(app)
+    realtimeDb = getDatabase(app)
     googleProvider = new GoogleAuthProvider()
     isFirebaseEnabled = true
     console.log('✅ Firebase initialized successfully - Google sign-in enabled')
@@ -48,4 +52,4 @@ if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
   console.log('📖 See FIREBASE_SETUP.md for instructions')
 }
 
-export { auth, db, googleProvider, isFirebaseEnabled }
+export { auth, db, realtimeDb, googleProvider, isFirebaseEnabled }

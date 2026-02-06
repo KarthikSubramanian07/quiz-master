@@ -4,12 +4,14 @@ import { useQuiz } from '../context/QuizContext'
 import { useAuth } from '../context/AuthContext'
 import DifficultySelector from '../components/DifficultySelector'
 import LoginModal from '../components/LoginModal'
+import { useActiveQuizUsers } from '../hooks/useActiveQuizUsers'
 
 function Home() {
   const navigate = useNavigate()
   const { difficulty, setDifficulty } = useQuiz()
   const { user, signOut, isGuest } = useAuth()
   const [showLoginModal, setShowLoginModal] = useState(false)
+  const activeCounts = useActiveQuizUsers()
 
   useEffect(() => {
     // Show login modal if user hasn't chosen yet
@@ -116,18 +118,33 @@ function Home() {
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          {categories.map((category, index) => (
-            <div
-              key={category.id}
-              className="group cursor-pointer transform transition-all duration-300 hover:-translate-y-3 animate-slide-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-              onClick={() => navigate(`/quiz/${category.id}`)}
-            >
-              <div className="card hover:border-purple-500/50 relative overflow-hidden">
-                {/* Gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 to-indigo-600/0 group-hover:from-purple-600/10 group-hover:to-indigo-600/10 transition-all duration-500"></div>
+          {categories.map((category, index) => {
+            const activeCount = activeCounts[category.id] || 0
+            return (
+              <div
+                key={category.id}
+                className="group cursor-pointer transform transition-all duration-300 hover:-translate-y-3 animate-slide-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+                onClick={() => navigate(`/quiz/${category.id}`)}
+              >
+                <div className="card hover:border-purple-500/50 relative overflow-hidden">
+                  {/* Active Users Badge */}
+                  {activeCount > 0 && (
+                    <div
+                      className="absolute top-4 right-4 z-20 flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1.5 rounded-full shadow-lg animate-pulse"
+                      title={`${activeCount} ${activeCount === 1 ? 'user is' : 'users are'} quizzing now`}
+                    >
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+                      </svg>
+                      <span className="text-sm font-bold">{activeCount}</span>
+                    </div>
+                  )}
 
-                <div className="relative z-10">
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 to-indigo-600/0 group-hover:from-purple-600/10 group-hover:to-indigo-600/10 transition-all duration-500"></div>
+
+                  <div className="relative z-10">
                   <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center text-4xl mb-4 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-2xl`}>
                     {category.icon}
                   </div>
@@ -140,10 +157,11 @@ function Home() {
                   <button className="w-full py-3 px-6 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl hover:shadow-purple-500/50 transform group-hover:scale-105">
                     Start Quiz →
                   </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         {/* Stats Button */}
