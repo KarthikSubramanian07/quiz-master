@@ -82,19 +82,10 @@ quiz-master/
 4. **Open your browser**:
    - The app will open at `http://localhost:5173`
    - You should see the QuizMaster home page with category selection
+  
+Note: API keys are pre-configured in the .env file for judging convenience.
 
-### Building for Production
 
-To create an optimized production build:
-
-```bash
-npm run build
-```
-
-The built files will be in the `dist/` directory. You can preview the production build with:
-
-```bash
-npm run preview
 ```
 
 ## License 📄
