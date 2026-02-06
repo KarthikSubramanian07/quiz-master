@@ -63,14 +63,18 @@ function Home() {
   return (
     <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        {/* Top Bar with Logo and User Info */}
-        <div className="flex justify-between items-center mb-8 animate-fade-in">
+        {/* Logo */}
+        <div className="mb-6">
           <img
             src="/logo3.png"
             alt="QuizMaster Logo"
             className="h-12 md:h-14 w-auto object-contain drop-shadow-lg"
           />
-          {user && (
+        </div>
+
+        {/* User Info */}
+        {user && (
+          <div className="flex justify-end items-center mb-8 animate-fade-in">
             <div className="flex items-center gap-4">
               {!isGuest && (
                 <div className="glass-card px-6 py-3 flex items-center gap-3">
@@ -100,8 +104,8 @@ function Home() {
                 </button>
               )}
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Header */}
         <header className="text-center mb-12 animate-fade-in">
