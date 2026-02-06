@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
           setIsGuest(false)
           localStorage.setItem('quizmaster_user', JSON.stringify(userData))
         } else {
-          // User is signed out - check for guest mode
+          // User is signed out - check for guest mode or create guest
           const savedUser = localStorage.getItem('quizmaster_user')
           if (savedUser) {
             try {
@@ -41,10 +41,17 @@ export const AuthProvider = ({ children }) => {
               if (userData.isGuest) {
                 setUser(userData)
                 setIsGuest(true)
+              } else {
+                // Previous user was Google user, create new guest
+                createDefaultGuest()
               }
             } catch (error) {
               console.error('Error loading user data:', error)
+              createDefaultGuest()
             }
+          } else {
+            // No saved user, create guest by default
+            createDefaultGuest()
           }
         }
         setLoading(false)
@@ -52,20 +59,37 @@ export const AuthProvider = ({ children }) => {
 
       return () => unsubscribe()
     } else {
-      // Firebase not enabled - check localStorage for guest
+      // Firebase not enabled - check localStorage or create guest
       const savedUser = localStorage.getItem('quizmaster_user')
       if (savedUser) {
         try {
           const userData = JSON.parse(savedUser)
           setUser(userData)
-          setIsGuest(userData.isGuest || false)
+          setIsGuest(userData.isGuest !== false)
         } catch (error) {
           console.error('Error loading user data:', error)
+          createDefaultGuest()
         }
+      } else {
+        // No saved user, create guest by default
+        createDefaultGuest()
       }
       setLoading(false)
     }
   }, [])
+
+  const createDefaultGuest = () => {
+    const guestUser = {
+      uid: 'guest_' + Date.now(),
+      displayName: 'Guest User',
+      email: null,
+      photoURL: null,
+      isGuest: true
+    }
+    setUser(guestUser)
+    setIsGuest(true)
+    localStorage.setItem('quizmaster_user', JSON.stringify(guestUser))
+  }
 
   const signInWithGoogle = async () => {
     try {
@@ -129,14 +153,18 @@ export const AuthProvider = ({ children }) => {
       console.error('Error signing out:', error)
     }
 
-    setUser(null)
-    setIsGuest(true)
-    localStorage.removeItem('quizmaster_user')
-
-    // Also clear quiz data for guest users
-    if (isGuest) {
-      localStorage.removeItem('quizmaster_data')
+    // After signing out, create a new guest user
+    const guestUser = {
+      uid: 'guest_' + Date.now(),
+      displayName: 'Guest User',
+      email: null,
+      photoURL: null,
+      isGuest: true
     }
+
+    setUser(guestUser)
+    setIsGuest(true)
+    localStorage.setItem('quizmaster_user', JSON.stringify(guestUser))
   }
 
   const value = {
